@@ -1,0 +1,8 @@
+[Unit]
+Description=dataCenterColect
+[Service]
+Type=simple
+ExecStart=/etc/init.d/geradoresColect start
+
+[Install]
+WantedBy=multi-user.target
