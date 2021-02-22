@@ -12,7 +12,7 @@ class JsonFy:
         data = self.__read.select_DB(horas_de_coleta=tempo_coleta)
         host_DC = defaultdict(list)
         for row_db in data:
-            hostname_db, data_hora_db, temperatura_ar_db, temperatura_orvalho_db, umidade_db, pressao_local_db = row_db
+            hostname_db, data_hora_db, temperatura_ar_db, temperatura_orvalho_db, umidade_db, pressao_local_db,correnteFaseA_db,correnteFaseB_db, correnteFaseC_db, correnteNeutro_db, statusEnergia_db = row_db
 
             host_DC[hostname_db].append({
                 "timestamp": datetime.timestamp(data_hora_db),
@@ -30,7 +30,7 @@ class JsonFy:
         data = self.__read.min_max_med_DB(dias)
         host_DC2 = defaultdict(list)
         for row_db in data:
-            hostname, data_hora_db, min_temperatura, max_temperatura, med_temperatura, min_temperatura_orvalho, max_temperatura_orvalho, med_temperatura_orvalho, min_umidade, max_umidade, med_umidade, min_pressao_local, max_pressao_local, med_pressao_local = row_db
+            hostname, data_hora_db, min_temperatura,max_temperatura, med_temperatura, min_temperatura_orvalho, max_temperatura_orvalho, med_temperatura_orvalho, min_umidade, max_umidade, med_umidade, min_pressao_local, max_pressao_local, med_pressao_local,min_corrente_fase_A, max_corrente_fase_A, med_corrente_fase_A,min_corrente_fase_B, max_corrente_fase_B, med_corrente_fase_B,min_corrente_fase_C, max_corrente_fase_C, med_corrente_fase_C,min_corrente_fase_Neutro, max_corrente_fase_Neutro, med_corrente_fase_Neutro,min_status_energia, max_status_energia, med_status_energia = row_db
 
             host_DC2[hostname].append({
                 "timestamp": datetime.timestamp(data_hora_db),
@@ -46,7 +46,22 @@ class JsonFy:
                 "umidade_max": float(max_umidade),
                 "pressao_local": float(med_pressao_local),
                 "pressao_local_min": float(min_pressao_local),
-                "pressao_local_max": float(max_pressao_local)
+                "pressao_local_max": float(max_pressao_local),
+                "max_corrente_fase_A":float(max_corrente_fase_A),
+                "med_corrente_fase_A":float(med_corrente_fase_A),
+                "min_corrente_fase_B":float(min_corrente_fase_B),
+                "max_corrente_fase_B":float(max_corrente_fase_B),
+                "med_corrente_fase_B":float(med_corrente_fase_B),
+                "min_corrente_fase_C":float(min_corrente_fase_C),
+                "max_corrente_fase_C":float(max_corrente_fase_C),
+                "med_corrente_fase_C":float(med_corrente_fase_C),
+                "min_corrente_fase_Neutro":float(min_corrente_fase_Neutro),
+                "max_corrente_fase_Neutro":float(max_corrente_fase_Neutro),
+                "med_corrente_fase_Neutro":float(med_corrente_fase_Neutro),
+                "min_status_energia":float(min_status_energia),
+                "max_status_energia":float(max_status_energia),
+                "med_status_energia":float(med_status_energia),
+
             })
         return host_DC2
 
@@ -56,7 +71,7 @@ class JsonFy:
         host_DC3 = defaultdict(list)
 
         for row_db in data:
-            hostname, datadia, hora, min_temperatura, max_temperatura, med_temperatura, min_temperatura_orvalho, max_temperatura_orvalho, med_temperatura_orvalho, min_umidade, max_umidade, med_umidade, min_pressao_local, max_pressao_local, med_pressao_local = row_db
+            hostname, datadia, hora, min_temperatura,max_temperatura, med_temperatura, min_temperatura_orvalho, max_temperatura_orvalho, med_temperatura_orvalho, min_umidade, max_umidade, med_umidade, min_pressao_local, max_pressao_local, med_pressao_local,min_corrente_fase_A, max_corrente_fase_A, med_corrente_fase_A,min_corrente_fase_B, max_corrente_fase_B, med_corrente_fase_B,min_corrente_fase_C, max_corrente_fase_C, med_corrente_fase_C,min_corrente_fase_Neutro, max_corrente_fase_Neutro, med_corrente_fase_Neutro,min_status_energia, max_status_energia, med_status_energia = row_db
             data_hora = f'{datadia} {hora}:00:00'
 
             host_DC3[hostname].append({
@@ -73,6 +88,21 @@ class JsonFy:
                 "umidade_max": float(max_umidade),
                 "pressao_local": float(med_pressao_local),
                 "pressao_local_min": float(min_pressao_local),
-                "pressao_local_max": float(max_pressao_local)
+                "min_corrente_fase_A":float(min_corrente_fase_A),
+                "pressao_local_max":float(max_pressao_local),
+                "max_corrente_fase_A":float(max_corrente_fase_A),
+                "med_corrente_fase_A":float(med_corrente_fase_A),
+                "min_corrente_fase_B":float(min_corrente_fase_B),
+                "max_corrente_fase_B":float(max_corrente_fase_B),
+                "med_corrente_fase_B":float(med_corrente_fase_B),
+                "min_corrente_fase_C":float(min_corrente_fase_C),
+                "max_corrente_fase_C":float(max_corrente_fase_C),
+                "med_corrente_fase_C":float(med_corrente_fase_C),
+                "min_corrente_fase_Neutro":float(min_corrente_fase_Neutro),
+                "max_corrente_fase_Neutro":float(max_corrente_fase_Neutro),
+                "med_corrente_fase_Neutro":float(med_corrente_fase_Neutro),
+                "min_status_energia":float(min_status_energia),
+                "max_status_energia":float(max_status_energia),
+                "med_status_energia":float(med_status_energia),
             })
         return host_DC3
