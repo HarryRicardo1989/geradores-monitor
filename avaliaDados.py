@@ -22,24 +22,24 @@ class AVALIADOR:
             return True
         return False
 
-    def avalia(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local):
-        if hostname == "dcpredio":
-            hostname = "DATA CENTER PREDIO"
+    def avalia(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
+        if hostname == "geradorPredio":
+            hostname = "GERADOR PREDIO"
             if not self.should_update(self.avaliatempoCasa, 300):
                 return
             self.atitudePredio(hostname, data_hora, temperatura_ar,
                                temperatura_orvalho, umidade, pressao_local)
             self.avaliatempoCasa = time()
 
-        if hostname == "dccasa":
-            hostname = "DATA CENTER CASA"
+        if hostname == "geradorcasa":
+            hostname = "GERADOR CASA"
             if not self.should_update(self.avaliatempoPredio, 300):
                 return
             self.atitudeCasa(hostname, data_hora, temperatura_ar,
                              temperatura_orvalho, umidade, pressao_local)
             self.avaliatempoPredio = time()
 
-    def atitudeCasa(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local):
+    def atitudeCasa(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
 
         if temperatura_ar > 25:
             self.flagHighTempCasa = True
@@ -205,7 +205,7 @@ class AVALIADOR:
                     return
 
     def salva_log(self, exeption, mensagem):
-        with open("/var/log/LogDataCenter.log", 'a') as logDatacenter:
+        with open("/var/log/log-geradores.log", 'a') as logDatacenter:
             logDatacenter.write(f'{mensagem}\n')
             logDatacenter.write(f'{exeption}\n')
             logDatacenter.write("__________________________________ \n")
