@@ -4,6 +4,10 @@ from time import sleep, time
 
 
 class AVALIADOR:
+    set_point_max_Temp = 25
+    set_point_min_Temp= 18
+    set_point_max_umid = 75 
+
     def __init__(self):
         self.flagHighTempPredio = False
         self.flagLowTempPredio = False
@@ -41,7 +45,7 @@ class AVALIADOR:
 
     def atitudeCasa(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
 
-        if temperatura_ar > 25:
+        if temperatura_ar > set_point_max_Temp:
             self.flagHighTempCasa = True
             mensagem = f'"Problem: High Temperature on {hostname} at {data_hora}  <br> Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
@@ -62,7 +66,7 @@ class AVALIADOR:
                     self.salva_log(ex, mensagem)
                     return
 
-        if temperatura_ar < 18:
+        if temperatura_ar < set_point_min_Temp:
             self.flagLowTempCasa = True
             mensagem = f'" Problem Low Temperature on {hostname} at {data_hora}  <br>Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
@@ -82,7 +86,7 @@ class AVALIADOR:
                     self.salva_log(ex, mensagem)
                     return
 
-        if umidade > 75:
+        if umidade > set_point_max_umid:
             self.flagHighHumidityCasa = True
             mensagem = f'" Problem: High Humidity on {hostname} at {data_hora}  <br>Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
@@ -124,7 +128,7 @@ class AVALIADOR:
 
     def atitudePredio(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local):
 
-        if temperatura_ar > 25:
+        if temperatura_ar > set_point_max_Temp:
             self.flagHighTempPredio = True
             mensagem = f'"Problem: High Temperature on {hostname} at {data_hora}  <br>Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
@@ -144,7 +148,7 @@ class AVALIADOR:
                     self.salva_log(ex, mensagem)
                     return
 
-        if temperatura_ar < 18:
+        if temperatura_ar < set_point_min_Temp:
             self.flagLowTempPredio = True
             mensagem = f'" Problem: Low Temperature on {hostname} at {data_hora}  <br>Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
@@ -164,7 +168,7 @@ class AVALIADOR:
                     self.salva_log(ex, mensagem)
                     return
 
-        if umidade > 75:
+        if umidade > set_point_max_umid:
             self.flagHighHumidityPredio = True
             mensagem = f'" Problem: High Humidity on {hostname} at {data_hora} <br>Temperature: {temperatura_ar:3.2f}º <br>Humidity: {umidade:3.2f}% <br>Dew Point: {temperatura_orvalho:3.2f}º"'
             NTALK().envia(mensagem)
