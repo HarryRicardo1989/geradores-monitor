@@ -20,8 +20,13 @@ class JsonFy:
                 "temperatura_ar": temperatura_ar_db,
                 "temperatura_orvalho": temperatura_orvalho_db,
                 "umidade": umidade_db,
-                "pressao_local": pressao_local_db
-            })
+                "pressao_local": pressao_local_db,
+                "corrente_Fase_A": correnteFaseA_db,
+                "corrente_Fase_B": correnteFaseB_db,
+                "corrente_Fase_C": correnteFaseC_db,
+                "corrente_Neutro": correnteNeutro_db,
+                "status_Energia" : statusEnergia_db
+                 })
 
         return host_geradores
 
