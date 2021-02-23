@@ -26,7 +26,7 @@ class AVALIADOR:
             return True
         return False
 
-    def avalia(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
+    def avalia(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, corrente_fase_A, corrente_fase_B, corrente_fase_C, corrente_Neutro, status_energia):
         if hostname == "geradorPredio":
             hostname = "GERADOR PREDIO"
             if not self.should_update(self.avaliatempoCasa, 300):
@@ -43,7 +43,7 @@ class AVALIADOR:
                              temperatura_orvalho, umidade, pressao_local)
             self.avaliatempoPredio = time()
 
-    def atitudeCasa(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
+    def atitudeCasa(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, corrente_fase_A,corrente_fase_B, corrente_fase_C, corrente_Neutro, status_energia):
 
         if temperatura_ar > set_point_max_Temp:
             self.flagHighTempCasa = True

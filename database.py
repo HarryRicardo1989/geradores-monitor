@@ -13,13 +13,13 @@ class DATABASE:
         )
         pass
 
-    def insert_DB(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia):
+    def insert_DB(self, hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, corrente_fase_A, corrente_fase_B, corrente_fase_C, corrente_Neutro, status_energia):
 
         conn = self.connect
         cur = conn.cursor()
         try:
-            cur.execute("INSERT INTO gerador_dados_tbl ( hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local,corrente_fase_A,corrente_fase_B, corrente_fase_C, corrente_Neutro,status_energia) VALUES (?, ?, ?, ?, ?, ?,?,?,?,?,?)",
-                        (hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, correnteFaseA,correnteFaseB, correnteFaseC, correnteNeutro, statusEnergia))
+            cur.execute("INSERT INTO gerador_dados_tbl ( hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local,corrente_fase_A,corrente_fase_B, corrente_fase_C, corrente_Neutro, status_energia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        (hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, corrente_fase_A,corrente_fase_B, corrente_fase_C, corrente_Neutro, status_energia))
             print("ok")
         except mariadb.Error as e:
             print(f'Error: {e}')
@@ -33,7 +33,7 @@ class DATABASE:
         conn = self.connect
         cur = conn.cursor()
         cur.execute(
-            f'SELECT hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local,corrente_fase_A,corrente_fase_B, corrente_fase_C, corrente_Neutro,status_energia FROM gerador_dados_tbl where data_hora > "{tempo}" order by data_hora desc;')
+            f'SELECT hostname, data_hora, temperatura_ar, temperatura_orvalho, umidade, pressao_local, corrente_fase_A, corrente_fase_B, corrente_fase_C, corrente_Neutro,status_energia FROM gerador_dados_tbl where data_hora > "{tempo}" order by data_hora desc;')
         # cur.execute(f'SELECT * FROM tb_airquality order by ID desc')
         row_list = []
         for data in cur:
